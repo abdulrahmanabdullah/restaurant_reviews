@@ -130,7 +130,7 @@ resetRestaurants = (restaurants) => {
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
-    // ul.tabIndex = 0 ;
+    ul.tabIndex = 0 ;
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
@@ -143,7 +143,7 @@ createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
   // Add tabindex 
-  li.setAttribute('tabindex', restaurant.id);
+  // li.setAttribute('tabindex', restaurant.id);
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
@@ -192,7 +192,6 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', _ => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
-      console.log('register scope ', reg.scope);
     }, err => console.log(err));
   });
 }

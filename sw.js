@@ -1,5 +1,6 @@
 const CASH_NAME = ['v1'];
 let cachesAsset = [
+    'index.html',
     'restaurant.html',
     'css/styles.css',
     'data/restaurants.json',
@@ -8,7 +9,6 @@ let cachesAsset = [
     , 'img/6.jpg', 'img/7.jpg', 'img/8.jpg', 'img/9.jpg', 'img/10.jpg'
 ];
 self.addEventListener('install', e => {
-    console.log("installed");
     e.waitUntil(
         caches.open('v1')
             .then(function (cache) {
@@ -22,8 +22,6 @@ self.addEventListener('install', e => {
 
 //Activate event
 self.addEventListener('activate', e => {
-    console.log('Activated');
-
     // Clear old cach 
     e.waitUntil(
         caches.keys().then(cacheNames =>
@@ -31,11 +29,8 @@ self.addEventListener('activate', e => {
                 cacheNames.map(
                     cache => {
                         if (!cacheNames.includes(cache)) {
-                            console.log("Cleared 👍");
                             caches.delete(cache);
-                        } else {
-                            console.log("Nope 🤒");
-                        }
+                        } 
                     }
                 )
             )
@@ -45,7 +40,6 @@ self.addEventListener('activate', e => {
 
 //Call fetch event - offline event 
 self.addEventListener('fetch', e => {
-    console.log("Fetch");
     e.respondWith(
         caches.match(e.request).then(response => {
             if (response) return response;
